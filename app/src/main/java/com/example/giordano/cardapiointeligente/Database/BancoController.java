@@ -5,8 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.giordano.cardapiointeligente.Model.Acompanhamento;
-import com.example.giordano.cardapiointeligente.Model.Frutas;
+import com.example.giordano.cardapiointeligente.Model.Sabor;
 import com.example.giordano.cardapiointeligente.Model.Pedido;
 import com.example.giordano.cardapiointeligente.Util.DateConvert;
 import com.example.giordano.cardapiointeligente.Util.ParserOrder;
@@ -43,19 +42,11 @@ public class BancoController {
         valores.put("data_pedido",DateConvert.toPtBr(p.getData()));
         /**Pedido local ou viagem*/
         valores.put(p.getLocal().toString().toLowerCase(),1);
-        /**Tamanho + Formas de Adoçar*/
-        if(p.getAcai().getAdicional()!=null){
-            valores.put(ParserOrder.removerAcentos(p.getAcai().getTam().getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase()+"_"+p.getAcai().getAdicional().getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase()),1);
-        }
         /**Tamanho + Sabor*/
-        valores.put(ParserOrder.removerAcentos(p.getAcai().getTam().getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase()+"_"+p.getAcai().getSabor().getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase()),1);
+        valores.put(ParserOrder.removerAcentos(p.getDrink().getTam().getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase()+"_"+p.getDrink().getSabor().getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase()),1);
         /**Acompanhamentos*/
-        for (Acompanhamento a: p.getAcai().getAcomp()) {
+        for (Sabor a: p.getDrink().getAcomp()) {
             valores.put(ParserOrder.removerAcentos(a.getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase()),1);
-        }
-        /**Frutas adicionais*/
-        for (Frutas f: p.getAcai().getFrutas()) {
-            valores.put(ParserOrder.removerAcentos(f.getNome().replaceAll(" ","").replaceAll("ç","c").toLowerCase()),1);
         }
         /**Valor Total*/
         p.CalcularPedido();

@@ -6,17 +6,17 @@ public class Pedido {
 	
 	private String nome;
 	private Date data;
-	private Acai acai;
+	private Drink drink;
 	private Local local;
 	private double total;
 
-	public Pedido (Acai acai) {
-		this.acai = acai;
+	public Pedido (Drink drink) {
+		this.drink = drink;
 	}
 	
 	
-	public Acai getAcai() {
-		return acai;
+	public Drink getDrink() {
+		return drink;
 	}
 	
 	public double getTotal() {		
@@ -43,8 +43,8 @@ public class Pedido {
 		this.data = data;
 	}
 
-	public void setAcai(Acai acai) {
-		this.acai = acai;
+	public void setDrink(Drink drink) {
+		this.drink = drink;
 	}
 
 	public void setLocal(Local local) {
@@ -60,24 +60,17 @@ public class Pedido {
 
 		total += this.local.equals(Local.VIAGEM)?1:0;
 
-		if(this.acai.getAcomp()!= null)
-			for(int i = 0; i<this.acai.getAcomp().size(); i++){
+		if(this.drink.getAcomp()!= null)
+			for(int i = 0; i<this.drink.getAcomp().size(); i++){
 				if(i>=4){
 					total += 1.5;
 				}
 			}
 
-		if(this.acai.getFrutas()!=null)
-			for(Frutas fruta: this.acai.getFrutas())
-				total += fruta.getValor();
-
-		if(this.acai.getAdicional()!=null)
-			total += this.acai.adicional.getValor();
-
-		if(this.acai.tam != null)
-			total += this.acai.getTam().getValor();
-		if(this.acai.sabor != null)
-			total +=this.acai.sabor.getValor();
+		if(this.drink.tam != null)
+			total += this.drink.getTam().getValor();
+		if(this.drink.drinkType != null)
+			total +=this.drink.drinkType.getValor();
 
 			this.total = total;
 	}

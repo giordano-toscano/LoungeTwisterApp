@@ -6,9 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
-import android.widget.TextView;
 
 import com.example.giordano.cardapiointeligente.Model.Sabor;
 
@@ -17,14 +16,15 @@ import java.util.ArrayList;
 public class AdapterSabores extends ArrayAdapter<Sabor> {
 
     private final Context context;
-    private final ArrayList<Sabor> saboresList;
+    private final ArrayList<Sabor> saborArrayList;
+    private static String CHAVE_ACOMPANHAMENTOS = "precoAcompanhamentos";
+    private static String QTD_SELECIONADA = "quantidadeAcompanhamentos";
 
-    float preco = 0;
 
-    public AdapterSabores(Context context, ArrayList<Sabor> saboresList) {
-        super(context, R.layout.custom_layout_list_sabores,saboresList);
+    public AdapterSabores(Context context, ArrayList<Sabor> acompanhamentosArrayList) {
+        super(context, R.layout.custom_layout_list_frutas,acompanhamentosArrayList);
         this.context = context;
-        this.saboresList = saboresList;
+        this.saborArrayList = acompanhamentosArrayList;
     }
 
     @Override
@@ -34,59 +34,51 @@ public class AdapterSabores extends ArrayAdapter<Sabor> {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent){
+    public View getView(final int position, final View convertView, final ViewGroup parent){
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.custom_layout_list_sabores, parent , false);
+        View rowView = inflater.inflate(R.layout.custom_layout_list_acompanhamentos, parent , false);
 
-        final RadioButton rdbtn_listaSabores = (RadioButton) rowView.findViewById(R.id.rdbtn_listaSabores);
-        TextView preco_listaSabores = (TextView)rowView.findViewById(R.id.preco_listaSabores);
+        final CheckBox rdbtn_listaTipos = rowView.findViewById(R.id.chckbtn_listaAcompanhamentos);
 
-        rdbtn_listaSabores.setText(saboresList.get(position).getDescricao());
+        rdbtn_listaTipos.setText(saborArrayList.get(position).getDescricao());
+        rdbtn_listaTipos.setChecked(saborArrayList.get(position).isComprado());
 
-        if(saboresList.get(position).isChecado() )
-            rdbtn_listaSabores.setChecked(true);
-        else
-            rdbtn_listaSabores.setChecked(false);
-
-        if(saboresList.get(position).getValor()==0){
-            preco_listaSabores.setText("");
-        }else {
-            preco_listaSabores.setText(" R$" + String.format("%.2f",saboresList.get(position).getValor()) + "");
-        }
-
-        rdbtn_listaSabores.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        rdbtn_listaTipos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                Preferences p = new Preferences(PreferenceManager.getDefaultSharedPreferences(context));
+                Preferences preferences = new Preferences(PreferenceManager.getDefaultSharedPreferences(context));
+                //int quantidadeAcompanhamentos = preferences.carregarPreferenciasInt(QTD_SELECIONADA);
 
-                setarLista(saboresList);
-                saboresList.get(position).setChecado(b);
+                float preco=0;
+                saborArrayList.get(position).setComprado(b);
+                if(b){
+                    //preco = acompanhamentoArrayList.get(position).getValor();
 
-                p.salvarPreferencias("precoSabores",saboresList.get(position).getValor());
+                }else{
+                    //preco = (-1) * acompanhamentoArrayList.get(position).getValor();
 
+                }
+
+                preferences.salvarPreferencias(CHAVE_ACOMPANHAMENTOS,preco);
+                //preferences.salvarPreferencias(QTD_SELECIONADA, quantidadeAcompanhamentos);
             }
         });
+
 
         return rowView;
     }
 
-    public void restaurarLista(ArrayList<Sabor> sabores){
-        this.saboresList.clear();
-        for(Sabor s : sabores){
-            s.setChecado(false);
+
+
+    public void restaurarLista(ArrayList<Sabor> sabors){
+        this.saborArrayList.clear();
+        for(Sabor a : sabors){
+            a.setComprado(false);
         }
-        this.saboresList.addAll(sabores);
+        this.saborArrayList.addAll(sabors);
 
         notifyDataSetChanged();
-    }
-
-    public void setarLista(ArrayList<Sabor> saboresList){
-
-        for (int i = 0; i <saboresList.size() ; i++) {
-            saboresList.get(i).setChecado(false);
-        }
-
     }
 
 }

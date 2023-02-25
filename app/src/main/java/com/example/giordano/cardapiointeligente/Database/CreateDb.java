@@ -4,17 +4,15 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 //import android.support.annotation.Nullable;
-import com.example.giordano.cardapiointeligente.Model.Acompanhamento;
-import com.example.giordano.cardapiointeligente.Model.Adicional;
-import com.example.giordano.cardapiointeligente.Model.Frutas;
-import com.example.giordano.cardapiointeligente.Model.Local;
 import com.example.giordano.cardapiointeligente.Model.Sabor;
+import com.example.giordano.cardapiointeligente.Model.DrinkType;
+import com.example.giordano.cardapiointeligente.Model.Local;
 import com.example.giordano.cardapiointeligente.Model.Tamanho;
 import com.example.giordano.cardapiointeligente.Util.ParserOrder;
 
 public class CreateDb extends SQLiteOpenHelper {
 
-    private static final String NOME_BANCO = "lounge_acai.db";
+    private static final String NOME_BANCO = "lounge_twister.db";
     private static final String TABELA = "historico";
     private static final int VERSAO = 1;
 
@@ -45,23 +43,16 @@ public class CreateDb extends SQLiteOpenHelper {
                 +"("
                 + "id" + " INTEGER primary key autoincrement,"
                 + "data_pedido" + " TEXT,";
+
         for (Tamanho t: Tamanho.values()) {
-            for (Adicional a: Adicional.values()) {
-                auxSql += ParserOrder.removerAcentos(t.getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase()+"_"+a.getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase()) +" INTEGER DEFAULT 0,";
-            }
-        }
-        for (Tamanho t: Tamanho.values()) {
-            for (Sabor s: Sabor.values()) {
+            for (DrinkType s: DrinkType.values()) {
                 auxSql += ParserOrder.removerAcentos(t.getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase()+"_"+s.getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase())+" INTEGER DEFAULT 0,";
             }
         }
         auxSql += Local.LOCAL.toString().toLowerCase()+ " INTEGER DEFAULT 0,";
         auxSql += Local.VIAGEM.toString().toLowerCase()+ " INTEGER DEFAULT 0,";
-        for (Acompanhamento a: Acompanhamento.values()){
+        for (Sabor a: Sabor.values()){
             auxSql += ParserOrder.removerAcentos(a.getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase())+" INTEGER DEFAULT 0,";
-        }
-        for (Frutas f: Frutas.values()){
-            auxSql += ParserOrder.removerAcentos(f.getNome().replaceAll(" ","").replaceAll("ç","c").toLowerCase())+" INTEGER DEFAULT 0,";
         }
         String sql = auxSql
                 + "valor_pedido" +" REAL"

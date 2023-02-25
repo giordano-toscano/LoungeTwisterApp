@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="paletaPrincipal">#3A0152</color>
     <color name="paletaSecundaria">#49920F</color>
+    <color name="sectionColor">#cd3065</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>

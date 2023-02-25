@@ -1,12 +1,9 @@
 package com.example.giordano.cardapiointeligente.Model;
 
 public enum Tamanho {
-
-	PP("PP",7.5),
-	P("P",10.5),
-	M("M",13.5),
-	G("G",16.5),
-	GG("GG",22.5);
+	P("P",0),
+	M("M",0),
+	G("G",0);
 
 	private double valor;
 	private boolean checado;

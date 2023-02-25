@@ -1,10 +1,8 @@
 package com.example.giordano.cardapiointeligente.Service;
 
-import com.example.giordano.cardapiointeligente.Model.Acai;
-import com.example.giordano.cardapiointeligente.Model.Acompanhamento;
-import com.example.giordano.cardapiointeligente.Model.Adicional;
-import com.example.giordano.cardapiointeligente.Model.Frutas;
+import com.example.giordano.cardapiointeligente.Model.Drink;
 import com.example.giordano.cardapiointeligente.Model.Sabor;
+import com.example.giordano.cardapiointeligente.Model.DrinkType;
 import com.example.giordano.cardapiointeligente.Model.Tamanho;
 
 import java.util.ArrayList;
@@ -17,13 +15,11 @@ public class CardapioService {
 
 
 
-    public Acai gerarAcai(ArrayList<Tamanho> tamanhoArrayList, ArrayList<Adicional> formasAdocarArrayList,ArrayList<Sabor> saborArrayList, ArrayList<Acompanhamento> acompanhamentoLista1ArrayList,ArrayList<Acompanhamento> acompanhamentoLista2ArrayList,ArrayList<Frutas> frutasArrayList ){
-        Acai acai = new Acai();
-        acai.setSabor(montarSabor(saborArrayList));
+    public Drink generateDrink(ArrayList<Tamanho> tamanhoArrayList, ArrayList<DrinkType> drinkTypeArrayList, ArrayList<Sabor> saborLista1ArrayList, ArrayList<Sabor> saborLista2ArrayList){
+        Drink acai = new Drink();
+        acai.setSabor(montarSabor(drinkTypeArrayList));
         acai.setTam(montarTamanho(tamanhoArrayList));
-        acai.setAdicional(montarFormasAdocar(formasAdocarArrayList));
-        acai.setAcomp(montarAcompanhamentos(acompanhamentoLista1ArrayList,acompanhamentoLista2ArrayList));
-        acai.setFrutas(montarArrayFrutas(frutasArrayList));
+        acai.setAcomp(montarAcompanhamentos(saborLista1ArrayList, saborLista2ArrayList));
         return acai;
     }
 
@@ -37,52 +33,31 @@ public class CardapioService {
         return tamanho;
     }
 
-    public Adicional montarFormasAdocar(ArrayList<Adicional> formasAdocarArrayList) {
-        Adicional adicional = null;
-        for(Adicional a : formasAdocarArrayList){
-            if(a.isComprado()){
-                adicional = a;
-            }
-        }
-        return adicional;
-    }
-
-    public Sabor montarSabor(ArrayList<Sabor> saborArrayList){
-        Sabor sabor = null;
-        for(Sabor s : saborArrayList){
+    public DrinkType montarSabor(ArrayList<DrinkType> drinkTypeArrayList){
+        DrinkType drinkType = null;
+        for(DrinkType s : drinkTypeArrayList){
             if(s.isChecado()){
-                sabor = s;
+                drinkType = s;
             }
         }
-        return sabor;
+        return drinkType;
     }
 
-    public ArrayList<Acompanhamento> montarAcompanhamentos(ArrayList<Acompanhamento> acompanhamentoLista1ArrayList, ArrayList<Acompanhamento> acompanhamentoLista2ArrayList){
+    public ArrayList<Sabor> montarAcompanhamentos(ArrayList<Sabor> saborLista1ArrayList, ArrayList<Sabor> saborLista2ArrayList){
 
-        ArrayList<Acompanhamento> comprados = new ArrayList<Acompanhamento>();
-        for(Acompanhamento acompanhamento : acompanhamentoLista1ArrayList){
-            if(acompanhamento.isComprado()){
-                comprados.add(acompanhamento);
+        ArrayList<Sabor> comprados = new ArrayList<Sabor>();
+        for(Sabor sabor : saborLista1ArrayList){
+            if(sabor.isComprado()){
+                comprados.add(sabor);
             }
         }
-        for(Acompanhamento acompanhamento : acompanhamentoLista2ArrayList) {
-            if (acompanhamento.isComprado()) {
-                comprados.add(acompanhamento);
+        for(Sabor sabor : saborLista2ArrayList) {
+            if (sabor.isComprado()) {
+                comprados.add(sabor);
             }
         }
         return comprados;
     }
 
-    public ArrayList<Frutas> montarArrayFrutas (ArrayList<Frutas> frutasArrayList){
-        ArrayList<Frutas> comprados = new ArrayList<Frutas>();
-
-       for(Frutas frutas : frutasArrayList){
-           if(frutas.isComprado()){
-               comprados.add(frutas);
-           }
-       }
-
-        return comprados;
-    }
 
 }

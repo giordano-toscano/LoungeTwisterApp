@@ -1,43 +1,46 @@
 package com.example.giordano.cardapiointeligente.Model;
 
 public enum Sabor {
-	
-	ACAI("Açaí",0),
-	METADE_METADE("Metade Cupuaçu e Metade Açaí",0),
-	CUPUACU("Cupuacu",0);
-	
-	private String descricao;
+	LEITE_CONDENSADO("Leite Condensado", (float)1.5 ),
+	LEITE_PO("Leite em Pó",(float)1.5),
+	FARINHA_AMENDOIM("Farinha de Amendoim",(float)1.5),
+	//FLOCOS_ARROZ("Flocos de Arroz",(float)1.5),
+	AMENDOIM_T("Amendoim Triturado",(float)1.5),
+	BOLINHA_NESCAU("Bolinhas de Nescau",(float)1.5),
+	AMENDOIM("Amendoim",(float)1.5),
+	BANANA("Banana",(float)1.5),
+	MEL("Mel",(float)1.5),
+	FARINHA_LACTEA("Farinha Láctea",(float)1.5),
+	FARINHA_CASTANHA("Farinha de Castanha",(float)1.5),
+	AVEIA("Aveia",(float)1.5),
+	GRANOLA("Granola",(float)1.5),
+	SUCRILHOS("Sucrilhos",(float)1.5);
+
 	private float valor;
-	private boolean checado;
+	private String descricao;
+	private boolean comprado;
 
-	Sabor (String descricao, float valor) {
-		this.setDescricao(descricao);
-		this.setValor(valor);
-		this.checado=false;
+	public boolean isComprado() {
+		return comprado;
 	}
 
-	public boolean isChecado() {
-		return checado;
-	}
-
-	public void setChecado(boolean checado) {
-		this.checado = checado;
+	public void setComprado(boolean comprado) {
+		this.comprado = comprado;
 	}
 
 	public String getDescricao() {
 		return descricao;
 	}
 
-	private void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	
 	public float getValor() {
 		return valor;
 	}
 
-	public void setValor(float valor) {
+	private Sabor(String descricao, float valor) {
 		this.valor = valor;
+		this.descricao = descricao;
+		this.comprado = false;
 	}
-
+	
+	
 }
