@@ -79,7 +79,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tamanho + Sabor"
+                    android:text="Tamanho + Tipo de Bebida"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -244,7 +244,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pedidos por Acompanhamento"
+                    android:text="Pedidos por Sabor"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -254,10 +254,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Amedoim Triturado: " />
+                        android:text="Maracujá: " />
 
                     <TextView
-                        android:id="@+id/amendoimtriturado"
+                        android:id="@+id/maracuja"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />
@@ -270,10 +270,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Banana: " />
+                        android:text="Chocolate: " />
 
                     <TextView
-                        android:id="@+id/banana"
+                        android:id="@+id/chocolate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />
@@ -286,10 +286,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Aveia: " />
+                        android:text="Paçoca: " />
 
                     <TextView
-                        android:id="@+id/aveia"
+                        android:id="@+id/pacoca"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />
@@ -302,10 +302,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Farinha Láctea: " />
+                        android:text="Menta: " />
 
                     <TextView
-                        android:id="@+id/farinhalactea"
+                        android:id="@+id/menta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />
@@ -318,10 +318,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Granola: " />
+                        android:text="Cupuaçu: " />
 
                     <TextView
-                        android:id="@+id/granola"
+                        android:id="@+id/cupuacu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />
@@ -335,10 +335,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Leite em Pó: " />
+                        android:text="Oreo: " />
 
                     <TextView
-                        android:id="@+id/leiteempo"
+                        android:id="@+id/oreo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />
@@ -351,10 +351,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Farinha de Castanha: " />
+                        android:text="Láctea: " />
 
                     <TextView
-                        android:id="@+id/farinhadecastanha"
+                        android:id="@+id/lactea"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />
@@ -367,10 +367,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bolinhas de Nescau: " />
+                        android:text="Morango: " />
 
                     <TextView
-                        android:id="@+id/bolinhasdenescau"
+                        android:id="@+id/morango"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />
@@ -383,10 +383,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Farinha de Amendoim: " />
+                        android:text="Açaí: " />
 
                     <TextView
-                        android:id="@+id/farinhadeamendoim"
+                        android:id="@+id/acai"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />
@@ -399,10 +399,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Amedoim: " />
+                        android:text="Baunilha: " />
 
                     <TextView
-                        android:id="@+id/amendoim"
+                        android:id="@+id/baunilha"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />
@@ -415,10 +415,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Leite Condensado: " />
+                        android:text="Ovomaltine: " />
 
                     <TextView
-                        android:id="@+id/leitecondensado"
+                        android:id="@+id/ovomaltine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />
@@ -431,10 +431,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mel: " />
+                        android:text="Abacaxi: " />
 
                     <TextView
-                        android:id="@+id/mel"
+                        android:id="@+id/abacaxi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />
@@ -447,10 +447,27 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sucrilhos: " />
+                        android:text="Dorgo: " />
 
                     <TextView
-                        android:id="@+id/sucrilhos"
+                        android:id="@+id/dorgo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Valor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Doce de Leite: " />
+
+                    <TextView
+                        android:id="@+id/docedeleite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Valor" />

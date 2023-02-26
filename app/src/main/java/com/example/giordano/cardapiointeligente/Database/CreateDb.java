@@ -52,7 +52,7 @@ public class CreateDb extends SQLiteOpenHelper {
         auxSql += Local.LOCAL.toString().toLowerCase()+ " INTEGER DEFAULT 0,";
         auxSql += Local.VIAGEM.toString().toLowerCase()+ " INTEGER DEFAULT 0,";
         for (Sabor a: Sabor.values()){
-            auxSql += ParserOrder.removerAcentos(a.getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase())+" INTEGER DEFAULT 0,";
+            auxSql += ParserOrder.removerAcentos(a.getDescricao().replaceAll(" ","").replaceAll("ç","c").replaceAll("/","").toLowerCase())+" INTEGER DEFAULT 0,";
         }
         String sql = auxSql
                 + "valor_pedido" +" REAL"

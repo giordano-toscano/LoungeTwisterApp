@@ -68,6 +68,9 @@ public class Historico extends AppCompatActivity {
             String uniaoId = ParserOrder.removerAcentos(a.getDescricao().replaceAll(" ","").replaceAll("ç","c").toLowerCase());
             int resID = getResources().getIdentifier(uniaoId, "id", getPackageName());
             TextView txt = (TextView)findViewById(resID);
+            if(txt == null){
+                continue;
+            }
             int valor = bancoController.getSomaPorColunaPorData(uniaoId,DateConvert.toPtBr(new Date()));
             txt.setText(""+valor);
             if(valor==0){

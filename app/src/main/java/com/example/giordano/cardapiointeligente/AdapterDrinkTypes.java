@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.giordano.cardapiointeligente.Model.DrinkType;
+import com.example.giordano.cardapiointeligente.Model.Sabor;
+import com.example.giordano.cardapiointeligente.View.ListaDinamica;
 
 import java.util.ArrayList;
 
@@ -62,6 +64,50 @@ public class AdapterDrinkTypes extends ArrayAdapter<DrinkType> {
 
                 setarLista(saboresList);
                 saboresList.get(position).setChecado(b);
+
+                if(saboresList.get(position).getDescricao().equalsIgnoreCase("milkshake") && b == true){
+                    ArrayList<Sabor> listA = new ArrayList<Sabor>();
+                    ArrayList<Sabor> listB = new ArrayList<Sabor>();
+                    Cardapio.addMilkshakeFlavors(listA,listB);
+                    Cardapio.adapterSabores1.restaurarLista(listA);
+                    Cardapio.adapterSabores2.restaurarLista(listB);
+                    Cardapio.saboresTile.setText("Sabores");
+                    Cardapio.listViewAcompanhamentos1.setVisibility(View.VISIBLE);
+                    Cardapio.listViewAcompanhamentos2.setVisibility(View.VISIBLE);
+                    ListaDinamica.setListViewHeighBasedOnItems(Cardapio.listViewAcompanhamentos1);
+                    ListaDinamica.setListViewHeighBasedOnItems(Cardapio.listViewAcompanhamentos2);
+                }else if(saboresList.get(position).getDescricao().equalsIgnoreCase("suco") && b == true){
+                    ArrayList<Sabor> listA = new ArrayList<Sabor>();
+                    ArrayList<Sabor> listB = new ArrayList<Sabor>();
+                    Cardapio.addJuiceFlavors(listA,listB);
+                    Cardapio.adapterSabores1.restaurarLista(listA);
+                    Cardapio.adapterSabores2.restaurarLista(listB);
+                    Cardapio.saboresTile.setText("Sabores");
+                    Cardapio.listViewAcompanhamentos1.setVisibility(View.VISIBLE);
+                    Cardapio.listViewAcompanhamentos2.setVisibility(View.VISIBLE);
+                    ListaDinamica.setListViewHeighBasedOnItems(Cardapio.listViewAcompanhamentos1);
+                    ListaDinamica.setListViewHeighBasedOnItems(Cardapio.listViewAcompanhamentos2);
+                }else if(saboresList.get(position).getDescricao().equalsIgnoreCase("vitamina") && b == true){
+                    ArrayList<Sabor> listA = new ArrayList<Sabor>();
+                    ArrayList<Sabor> listB = new ArrayList<Sabor>();
+                    Cardapio.addVitaminaFlavors(listA,listB);
+                    Cardapio.adapterSabores1.restaurarLista(listA);
+                    Cardapio.adapterSabores2.restaurarLista(listB);
+                    Cardapio.saboresTile.setText("Sabores");
+                    Cardapio.listViewAcompanhamentos1.setVisibility(View.VISIBLE);
+                    Cardapio.listViewAcompanhamentos2.setVisibility(View.VISIBLE);
+                    ListaDinamica.setListViewHeighBasedOnItems(Cardapio.listViewAcompanhamentos1);
+                    ListaDinamica.setListViewHeighBasedOnItems(Cardapio.listViewAcompanhamentos2);
+                }else{
+                    ArrayList<Sabor> listA = new ArrayList<Sabor>();
+                    ArrayList<Sabor> listB = new ArrayList<Sabor>();
+                    Cardapio.addJuiceFlavors(listA,listB);
+                    Cardapio.adapterSabores1.restaurarLista(listA);
+                    Cardapio.adapterSabores2.restaurarLista(listB);
+                    Cardapio.saboresTile.setText("");
+                    Cardapio.listViewAcompanhamentos1.setVisibility(View.INVISIBLE);
+                    Cardapio.listViewAcompanhamentos2.setVisibility(View.INVISIBLE);
+                }
 
                 p.salvarPreferencias("precoSabores",saboresList.get(position).getValor());
 

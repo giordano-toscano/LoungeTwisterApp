@@ -17,6 +17,8 @@ public class AdapterSabores extends ArrayAdapter<Sabor> {
 
     private final Context context;
     private final ArrayList<Sabor> saborArrayList;
+
+    private static byte hasOneButtonSelected = 0;
     private static String CHAVE_ACOMPANHAMENTOS = "precoAcompanhamentos";
     private static String QTD_SELECIONADA = "quantidadeAcompanhamentos";
 
@@ -25,6 +27,7 @@ public class AdapterSabores extends ArrayAdapter<Sabor> {
         super(context, R.layout.custom_layout_list_frutas,acompanhamentosArrayList);
         this.context = context;
         this.saborArrayList = acompanhamentosArrayList;
+        //this.hasOneButtonSelected = false;
     }
 
     @Override
@@ -51,11 +54,23 @@ public class AdapterSabores extends ArrayAdapter<Sabor> {
                 //int quantidadeAcompanhamentos = preferences.carregarPreferenciasInt(QTD_SELECIONADA);
 
                 float preco=0;
+
                 saborArrayList.get(position).setComprado(b);
                 if(b){
+                    resetAllExcept(position);
+                    if(parent.getId() == R.id.list1_acompanhamentos){
+                        hasOneButtonSelected = 1;
+                    }else{
+                        hasOneButtonSelected = 2;
+                    }
                     //preco = acompanhamentoArrayList.get(position).getValor();
 
                 }else{
+                    if(parent.getId() == R.id.list1_acompanhamentos){
+                        hasOneButtonSelected = 1;
+                    }else{
+                        hasOneButtonSelected = 2;
+                    }
                     //preco = (-1) * acompanhamentoArrayList.get(position).getValor();
 
                 }
@@ -71,13 +86,23 @@ public class AdapterSabores extends ArrayAdapter<Sabor> {
 
 
 
-    public void restaurarLista(ArrayList<Sabor> sabors){
+    public void restaurarLista(ArrayList<Sabor> sabores){
         this.saborArrayList.clear();
-        for(Sabor a : sabors){
+        for(Sabor a : sabores){
             a.setComprado(false);
         }
-        this.saborArrayList.addAll(sabors);
+        this.saborArrayList.addAll(sabores);
 
+        notifyDataSetChanged();
+    }
+
+    public void resetAllExcept(int position){
+
+        for(Sabor sabor : this.saborArrayList){
+            if(saborArrayList.indexOf(sabor) != position){
+                sabor.setComprado(false);
+            }
+        }
         notifyDataSetChanged();
     }
 

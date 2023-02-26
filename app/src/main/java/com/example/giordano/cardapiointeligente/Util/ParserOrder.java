@@ -31,7 +31,7 @@ public class ParserOrder {
         str += "Tipo da bebida:\n" + removerAcentos(pedido.getDrink().getSabor().getDescricao())+"\n";
 
         if(pedido.getDrink().getAcomp().size()!=0)
-            str += "Acompanhamentos:\n" + removerAcentos(acompanhamentosParser(pedido));
+            str += "Sabores:\n" + removerAcentos(acompanhamentosParser(pedido));
 
 //        str += "\nTotal: " + "R$" + String.format("%.2f",pedido.getTotal()) + "\n\n\n"+" "+"\n";
         str += "\n\n\n\n";

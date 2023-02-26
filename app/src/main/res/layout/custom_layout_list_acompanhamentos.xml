@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:onClick="buttonChecked"
+        android:buttonTint="#f29418"
         android:text="RadioButton"
         android:textColor="@color/paletaPrincipal"
         android:textSize="@dimen/txt_size_itens"

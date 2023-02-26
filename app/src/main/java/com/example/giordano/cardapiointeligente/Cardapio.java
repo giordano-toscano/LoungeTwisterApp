@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -59,8 +60,10 @@ public class Cardapio extends AppCompatActivity {
     ArrayList<Sabor> arrayAcompanhamentos1;
     ArrayList<Sabor> arrayAcompanhamentos2;
     ListView listViewSabores;
-    ListView listViewAcompanhamentos1;
-    ListView listViewAcompanhamentos2;
+
+    public static TextView saboresTile;
+    public static ListView listViewAcompanhamentos1;
+    public static ListView listViewAcompanhamentos2;
 
     Button btn_confirmarPedido;
 
@@ -73,16 +76,6 @@ public class Cardapio extends AppCompatActivity {
     RadioButton rdbtn_tamanhoM;
     RadioButton rdbtn_tamanhoG;
 
-    //Formas de Adoçar
-    CheckBox checkBox_Xarope;
-    CheckBox checkBox_SemAcucar;
-    CheckBox checkBox_Mel;
-    CheckBox checkBox_Mascavo;
-    CheckBox checkBox_Demerara;
-    CheckBox checkBox_Cristal;
-    CheckBox checkBox_Xilitol;
-    CheckBox checkBox_Stevia;
-
     //Marcar todos os Acompanhamentos
     CheckBox rdbtn_MarcarTodos;
 
@@ -92,8 +85,8 @@ public class Cardapio extends AppCompatActivity {
     int qtdClickHistorico;
 
     AdapterDrinkTypes adapterDrinkTypes;
-    AdapterSabores adapterSabores1;
-    AdapterSabores adapterSabores2;
+    public static AdapterSabores adapterSabores1;
+    public static AdapterSabores adapterSabores2;
 
     BluetoothPrinter btPrinter = new BluetoothPrinter();
     ParserOrder po = new ParserOrder(0);
@@ -151,6 +144,21 @@ public class Cardapio extends AppCompatActivity {
                 adapterSabores2.notifyDataSetChanged();
             }
         });
+
+        /*listViewAcompanhamentos1.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get the selected item text from ListView
+                String selectedItem = (String) parent.getItemAtPosition(position);
+                adapterSabores1.resetAllExcept(-1);
+                limparAdapter();
+                adapterSabores1.notifyDataSetChanged();
+                // Display the selected item in a Toast
+                Toast.makeText(view.getContext(), selectedItem, Toast.LENGTH_LONG).show();
+            }
+
+
+        });*/
 
         btn_confirmarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -307,8 +315,13 @@ public class Cardapio extends AppCompatActivity {
     public void inicializarComponentes() {
 
         listViewSabores = findViewById(R.id.list_Sabores);
+        saboresTile = findViewById(R.id.textView8);
         listViewAcompanhamentos1 = findViewById(R.id.list1_acompanhamentos);
         listViewAcompanhamentos2 = findViewById(R.id.list2_acompanhamentos);
+        saboresTile.setText("");
+        listViewAcompanhamentos1.setVisibility(View.INVISIBLE);
+        listViewAcompanhamentos2.setVisibility(View.INVISIBLE);
+
         rdbtn_MarcarTodos = findViewById(R.id.rdbtn_MarcarTodos);
         btn_confirmarPedido = findViewById(R.id.btn_confirmarPedido);
         btn_confirmarPedido.setText(Html.fromHtml("<b><big>" + getString(R.string.confirmar) + "</big></b>" ));
@@ -347,24 +360,79 @@ public class Cardapio extends AppCompatActivity {
         return listaDrinkTypes;
     }
 
-    public ArrayList<Sabor> addFlavors(ArrayList lista1, ArrayList lista2) {
+    public static ArrayList<Sabor> addMilkshakeFlavors(ArrayList lista1, ArrayList lista2) {
         ArrayList<Sabor> listaSabores = new ArrayList<>();
 
         //Adicionar Acompanhamentos//
-        listaSabores.add(Sabor.LEITE_CONDENSADO);
-        listaSabores.add(Sabor.LEITE_PO);
-        listaSabores.add(Sabor.FARINHA_AMENDOIM);
-        listaSabores.add(Sabor.AMENDOIM_T);
-        listaSabores.add(Sabor.BOLINHA_NESCAU);
-        listaSabores.add(Sabor.AMENDOIM);
+        listaSabores.add(Sabor.OVOMALTINE);
+        listaSabores.add(Sabor.OREO);
+        listaSabores.add(Sabor.ACAI);
+        listaSabores.add(Sabor.MARACUJA);
+        listaSabores.add(Sabor.MORANGO);
+        listaSabores.add(Sabor.BAUNILHA);
+        listaSabores.add(Sabor.CHOCOLATE);
+        listaSabores.add(Sabor.ABACAXI);
+        listaSabores.add(Sabor.MENTA);
+        listaSabores.add(Sabor.LACTEA);
+        listaSabores.add(Sabor.PACOCA);
+        listaSabores.add(Sabor.CUPUACU);
+        listaSabores.add(Sabor.DORGO);
+        listaSabores.add(Sabor.DOCE_DE_LEITE);
+
+        Collections.sort(listaSabores, new Comparador());
+
+        for (int i = 0; i < listaSabores.size(); i++) {
+            if(i%2==0){
+                lista1.add(listaSabores.get(i));
+            }else{
+                lista2.add(listaSabores.get(i));
+            }
+        }
+
+        return listaSabores;
+    }
+
+    public static ArrayList<Sabor> addJuiceFlavors(ArrayList lista1, ArrayList lista2) {
+        ArrayList<Sabor> listaSabores = new ArrayList<>();
+
+        //Adicionar Acompanhamentos//
+        listaSabores.add(Sabor.LARANJA);
+        listaSabores.add(Sabor.ABACAXI);
+        listaSabores.add(Sabor.LIMAO);
+        listaSabores.add(Sabor.MARACUJA);
+        listaSabores.add(Sabor.MELANCIA);
+        listaSabores.add(Sabor.CAJU);
+        listaSabores.add(Sabor.CAJA);
+        listaSabores.add(Sabor.GOIABA);
+        listaSabores.add(Sabor.MANGA);
+        listaSabores.add(Sabor.MELAO);
+        listaSabores.add(Sabor.TAMARINDO);
+        listaSabores.add(Sabor.UVA);
+        listaSabores.add(Sabor.GRAVIOLA);
+        listaSabores.add(Sabor.CUPUACU);
+
+        Collections.sort(listaSabores, new Comparador());
+
+        for (int i = 0; i < listaSabores.size(); i++) {
+            if(i%2==0){
+                lista1.add(listaSabores.get(i));
+            }else{
+                lista2.add(listaSabores.get(i));
+            }
+        }
+
+        return listaSabores;
+    }
+
+    public static ArrayList<Sabor> addVitaminaFlavors(ArrayList lista1, ArrayList lista2) {
+        ArrayList<Sabor> listaSabores = new ArrayList<>();
+
+        //Adicionar Acompanhamentos//
         listaSabores.add(Sabor.BANANA);
-        listaSabores.add(Sabor.MEL);
-        listaSabores.add(Sabor.FARINHA_LACTEA);
-        listaSabores.add(Sabor.FARINHA_CASTANHA);
-        listaSabores.add(Sabor.AVEIA);
-        //listaAcompanhamentos.add(Acompanhamento.FLOCOS_ARROZ);
-        listaSabores.add(Sabor.GRANOLA);
-        listaSabores.add(Sabor.SUCRILHOS);
+        listaSabores.add(Sabor.ABACATE);
+        listaSabores.add(Sabor.MAMAO_BANANA_MACA);
+        listaSabores.add(Sabor.GUARANA_DO_AMAZONAS);
+        listaSabores.add(Sabor.GUARACAI);
 
         Collections.sort(listaSabores, new Comparador());
 
@@ -503,10 +571,13 @@ public class Cardapio extends AppCompatActivity {
 
         ArrayList<Sabor> listA = new ArrayList<Sabor>();
         ArrayList<Sabor> listB = new ArrayList<Sabor>();
-        addFlavors(listA,listB);
+        addMilkshakeFlavors(listA,listB);
         adapterSabores1.restaurarLista(listA);
         adapterSabores2.restaurarLista(listB);
         rdbtn_MarcarTodos.setChecked(false);
+        saboresTile.setText("");
+        listViewAcompanhamentos1.setVisibility(View.INVISIBLE);
+        listViewAcompanhamentos2.setVisibility(View.INVISIBLE);
 
         Preferences preferences = new Preferences(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
 
@@ -547,7 +618,7 @@ public class Cardapio extends AppCompatActivity {
 
         arrayAcompanhamentos1 = new ArrayList<Sabor>();
         arrayAcompanhamentos2 = new ArrayList<Sabor>();
-        addFlavors(arrayAcompanhamentos1, arrayAcompanhamentos2);
+        //addMilkshakeFlavors(arrayAcompanhamentos1, arrayAcompanhamentos2);
         adapterSabores1 = new AdapterSabores(this, arrayAcompanhamentos1);
         listViewAcompanhamentos1.setAdapter(adapterSabores1);
         ListaDinamica.setListViewHeighBasedOnItems(listViewAcompanhamentos1);
