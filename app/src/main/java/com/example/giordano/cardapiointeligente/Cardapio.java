@@ -397,6 +397,7 @@ public class Cardapio extends AppCompatActivity {
 
         //Adicionar Acompanhamentos//
         listaSabores.add(Sabor.LARANJA);
+        listaSabores.add(Sabor.ACEROLA);
         listaSabores.add(Sabor.ABACAXI);
         listaSabores.add(Sabor.LIMAO);
         listaSabores.add(Sabor.MARACUJA);
